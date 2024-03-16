@@ -12,8 +12,6 @@ export default function SideBar() {
 
       <Outlet />
 
-      {/* <p>List of cities</p> */}
-
       <footer className={styles.footer}>
         <p className={styles.copyright}>
           &copy; copyright {new Date().getFullYear()} by worldwise inc.
