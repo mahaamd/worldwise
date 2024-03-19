@@ -1,5 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./City.module.css";
+import { useEffect, useState } from "react";
+import { useCitieis } from "../contexts/CitiesContext";
+import Button from "./Button";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -11,18 +14,28 @@ const formatDate = (date) =>
 
 function City() {
   // TEMP DATA
-  const currentCity = {
-    cityName: "Lisbon",
-    emoji: "🇵🇹",
-    date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
-  };
-
-  const { cityName, emoji, date, notes } = currentCity;
+  // const currentCity = {
+  //   cityName: "Lisbon",
+  //   emoji: "🇵🇹",
+  //   date: "2027-10-31T15:59:59.138Z",
+  //   notes: "My favorite city so far!",
+  // };
+  const navigate = useNavigate();
 
   const { id } = useParams();
+  const { getCity, currentCity } = useCitieis();
 
-  return <div>city {id}</div>;
+  getCity(id);
+
+  // useEffect(
+  //   function () {
+  //     getCity(id);
+  //   },
+  //   [id]
+  // );
+
+  const { cityName, emoji, date, notes } = currentCity;
+  //return <div>city {id}</div>;
 
   return (
     <div className={styles.city}>
@@ -56,9 +69,17 @@ function City() {
         </a>
       </div>
 
-      {/* <div>
-        <ButtonBack />
-      </div> */}
+      <div>
+        <Button
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+          }}
+          type="back"
+        >
+          &larr; Back
+        </Button>
+      </div>
     </div>
   );
 }

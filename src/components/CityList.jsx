@@ -1,3 +1,4 @@
+import { useCitieis } from "../contexts/CitiesContext";
 import CityItem from "./CityItem";
 import styles from "./CityList.module.css";
 import Message from "./Message";
@@ -5,7 +6,8 @@ import Message from "./Message";
 import Spinner from "./Spinner";
 
 /* eslint-disable react/prop-types */
-export default function CityList({ cities, isLoading }) {
+export default function CityList() {
+  const { cities, isLoading } = useCitieis();
   if (isLoading) {
     <Spinner />;
   }
