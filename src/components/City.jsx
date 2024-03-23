@@ -25,14 +25,14 @@ function City() {
   const { id } = useParams();
   const { getCity, currentCity } = useCitieis();
 
-  getCity(id);
+  //  getCity(id);
 
-  // useEffect(
-  //   function () {
-  //     getCity(id);
-  //   },
-  //   [id]
-  // );
+  useEffect(
+    function () {
+      getCity(id);
+    },
+    [id]
+  );
 
   const { cityName, emoji, date, notes } = currentCity;
   //return <div>city {id}</div>;

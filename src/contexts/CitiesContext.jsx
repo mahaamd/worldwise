@@ -29,9 +29,7 @@ function reducer(state, action) {
     case "cities/get":
       return {
         ...state,
-        currentCity: state.cities.find(
-          (item) => String(item.id) === String(action.payload)
-        ),
+        currentCity: action.payload,
       };
   }
 }
@@ -60,11 +58,21 @@ function CitiesProvider({ children }) {
     fetchData();
   }, []);
 
-  function getCity(id) {
+  async function getCity(id) {
     // console.log(typeof id);
     // console.log(typeof cities[0].id);
     // console.log(id);
-    dispatch({ type: "cities/get", payload: id });
+    // dispatch({ type: "cities/get", payload: id });
+    try {
+      dispatch({ type: "loading" });
+      const res = await fetch(`${BASE_URL}/cities?id=${id}`);
+      const data = await res.json();
+      console.log(data);
+      dispatch({ type: "cities/get", payload: data });
+    } catch (err) {
+      dispatch({ type: "rejected", payload: "there is no data found" });
+    }
+    //    dispatch({ type: "cities/get", payload: id });
   }
 
   async function createCity(newCity) {

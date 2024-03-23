@@ -10,10 +10,11 @@ import styles from "./Map.module.css";
 
 import { useEffect, useState } from "react";
 import { useCitieis } from "../contexts/CitiesContext";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useGeolocation } from "../hooks/useGeoLocation";
 import Button from "./Button";
 import { useUrlPosition } from "../hooks/useUrlPostion";
+import User from "./User";
 
 export default function Map() {
   // console.log(lat, lng);
@@ -66,6 +67,7 @@ export default function Map() {
         <ChangeCenter position={position} />
         <DetectClick />
       </MapContainer>
+      <User />
     </div>
   );
 }
